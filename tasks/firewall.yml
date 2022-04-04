@@ -1,0 +1,11 @@
+---
+- name: Open Libp2p ports in iptables
+  include_role: name=open-ports
+  vars:
+    open_ports_default_comment: '{{ codex_service_name }}'
+    open_ports_default_chain: 'SERVICES'
+    open_ports_list:
+      - { port: '{{ codex_listening_port }}', protocol: 'tcp', state: '{{ codex_firewall_libp2p_open | ternary("present", "absent") }}' }
+      - { port: '{{ codex_discovery_port }}', protocol: 'udp', state: '{{ codex_firewall_libp2p_open | ternary("present", "absent") }}' }
+      - { port: '{{ codex_metrics_port }}', chain: 'VPN', ipset: 'metrics.hq', state: '{{ codex_firewall_metrics_open | ternary("present", "absent") }}' }
+      - { port: '{{ codex_rest_port }}',    chain: 'VPN', ipset: '{{ env }}.{{ stage }}' }

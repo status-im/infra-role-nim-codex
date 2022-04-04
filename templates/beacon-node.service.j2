@@ -1,0 +1,25 @@
+[Unit]
+Description=Codex ({{ codex_repo_branch }})
+Documentation=https://github.com/status-im/nim-dagger/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User={{ codex_user }}
+Group={{ codex_group }}
+WorkingDirectory={{ codex_service_path }}
+SyslogIdentifier={{ codex_service_name }}
+SyslogFacility=local6
+SyslogLevel=debug
+Restart=on-failure
+ExecStart={{ codex_repo_path }}/build/codex \
+    --data-dir='{{ codex_data_folder }}' \
+##    --log-format={{ codex_log_format }} \
+##    --log-level={{ codex_log_level }} \
+    --listen-addrs=/ip4/{{ codex_public_address }}/tcp/{{ codex_listening_port }} \
+    --max-peers={{ codex_max_peers }} \
+    --api-port={{ codex_rest_port }} \
+    --cache-size={{ codex_cache_size }} \
+
+[Install]
+WantedBy=multi-user.target

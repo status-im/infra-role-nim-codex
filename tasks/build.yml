@@ -1,0 +1,30 @@
+---
+- name: Clone repo branch
+  git:
+    repo: '{{ codex_repo_url }}'
+    version: '{{ codex_repo_branch }}'
+    dest: '{{ codex_repo_path }}'
+    force: true
+    update: true
+  become_user: '{{ codex_user }}'
+
+- name: Check if node binary exists
+  stat:
+    path: '{{ codex_repo_path }}/build/codex'
+  register: codex_bin
+
+- name: Create timer for build script
+  include_role: name=systemd-timer
+  vars:
+    systemd_timer_name: '{{ codex_build_service_name }}'
+    systemd_timer_user: '{{ codex_user }}'
+    systemd_timer_group: '{{ codex_group }}'
+    systemd_timer_description: 'Build {{ codex_service_name }}'
+    systemd_timer_start_on_creation: '{{ not codex_bin.stat.exists }}'
+    systemd_timer_ionice_class: 'idle'
+    systemd_timer_consul_warning: true
+    systemd_timer_enabled: '{{ codex_build_timer_enabled }}'
+    systemd_timer_frequency: '{{ codex_build_frequency }}'
+    systemd_timer_timeout_sec: '{{ codex_build_timer_timeout }}'
+    systemd_timer_work_dir: '{{ codex_service_path }}'
+    systemd_timer_script_path: '{{ codex_service_path }}/build.sh'

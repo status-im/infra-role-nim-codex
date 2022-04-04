@@ -1,0 +1,23 @@
+---
+- name: Symlink service logs folder
+  file:
+    src: '/var/log/service/{{ codex_service_name }}'
+    dest: '{{ codex_logs_link }}'
+    state: 'link'
+    force: true
+
+- name: Create systemd Unit file
+  template:
+    src: 'beacon-node.service.j2'
+    dest: '/etc/systemd/system/{{ codex_service_name }}.service'
+    mode: 0644
+  register: codex_service_definition
+
+- name: Reload and restart the service
+  systemd:
+    name: '{{ codex_service_name }}.service'
+    enabled: true
+    daemon_reload: true
+    state: |-
+      {{ codex_service_definition.changed
+       | ternary("restarted", "started") }}

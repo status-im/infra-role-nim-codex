@@ -1,0 +1,25 @@
+---
+- name: Create user for codex builds
+  user:
+    name: '{{ codex_user }}'
+    group: '{{ codex_group }}'
+    shell: '/bin/bash'
+
+- name: Set disable rebase as merge strategy
+  git_config:
+    scope: 'global'
+    name: 'pull.rebase'
+    value: 'false'
+  become_user: '{{ codex_user }}'
+
+- name: Sudoers file to let non-root users start jobs
+  template:
+    src: 'builds_sudoers.j2'
+    dest: '/etc/sudoers.d/80-{{ codex_service_name }}-builds'
+    mode: 0440
+
+- name: Sudoers file for login as codex user
+  template:
+    src: 'codex_sudoers.j2'
+    dest: '/etc/sudoers.d/81-{{ codex_service_name }}-login'
+    mode: 0440

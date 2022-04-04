@@ -1,0 +1,12 @@
+# Allow non-root users start Codex builds and manage service with sudo.
+
+# {{ codex_service_name }}
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *status {{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *start {{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *stop {{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *restart {{ codex_service_name }}*
+# build-{{ codex_service_name }}
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *status build-{{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *start build-{{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *stop build-{{ codex_service_name }}*
+%{{ codex_group }} ALL= NOPASSWD: /usr/bin/systemctl *restart build-{{ codex_service_name }}*
