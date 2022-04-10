@@ -20,6 +20,9 @@ ExecStart={{ codex_repo_path }}/build/codex \
     --max-peers={{ codex_max_peers }} \
     --api-port={{ codex_rest_port }} \
     --cache-size={{ codex_cache_size }} \
+    --eth-public-key={{ codex_eth_public_key }} \
+    --storage-contract-addr={{ codex_eth_storage_contract }} \
+    --token-contract-addr={{ codex_eth_token_contract }} \
 
 [Install]
 WantedBy=multi-user.target

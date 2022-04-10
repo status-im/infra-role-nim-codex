@@ -31,6 +31,11 @@ codex_max_peers: 160
 codex_discovery_port: 9000
 codex_listening_port: 9000
 
+# Ethereum public key for Codex node and addresses of deployed Codex contracts
+codex_eth_public_key: ''
+codex_eth_storage_contract: ''
+codex_eth_token_contract: ''
+
 # Firewall
 codex_firewall_libp2p_open: true
 codex_firewall_metrics_open: true
