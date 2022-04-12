@@ -33,10 +33,10 @@ function buildBinaries() {
 
     mkdir -p build
     # Rename binaries to match commit they were built from.
-    mv "dagger.out" "build/codex_${COMMIT}"
+    mv "dagger.out" "build/nim_codex_${COMMIT}"
 
     # Create a symbolic link to the latest version
-    ln -frs build/codex_${COMMIT} build/codex
+    ln -frs build/nim_codex_${COMMIT} build/nim_codex
 
     # Delete copies that are older than N days
     find build -mtime +{{ nim_codex_build_days_kept }} -exec rm '{}' \+
