@@ -9,3 +9,7 @@
         port: '{{ nim_codex_listening_port }}'
         address: '{{ nim_codex_public_address }}'
         tags: ['{{ env }}.{{ stage }}', 'codex', 'storage']
+        checks:
+          - name: '{{ nim_codex_service_name }}-health'
+            type: 'http'
+            http: 'http://localhost:{{ nim_codex_rest_port }}/api/dagger/v1/info'
