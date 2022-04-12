@@ -1,5 +1,5 @@
 ---
-nim_codex_service_name: 'codex-{{ nim_codex_repo_branch }}'
+nim_codex_service_name: 'nim-codex-{{ nim_codex_repo_branch }}'
 nim_codex_service_path: '/data/{{ nim_codex_service_name }}'
 nim_codex_data_folder: '{{ nim_codex_service_path }}/data'
 nim_codex_repo_path: '{{ nim_codex_service_path }}/repo'
