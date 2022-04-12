@@ -1,18 +1,18 @@
 ---
 - name: Create service directory
   file:
-    path: '{{ codex_data_folder }}'
+    path: '{{ nim_codex_data_folder }}'
     state: directory
-    owner: '{{ codex_user }}'
-    group: '{{ codex_group }}'
+    owner: '{{ nim_codex_user }}'
+    group: '{{ nim_codex_group }}'
     mode: 0770
 
 - name: Create helper scripts
   template:
     src: '{{ item }}'
-    dest: '{{ codex_service_path }}/{{ item|basename|replace(".j2", "") }}'
-    owner: '{{ codex_user }}'
-    group: '{{ codex_group }}'
+    dest: '{{ nim_codex_service_path }}/{{ item|basename|replace(".j2", "") }}'
+    owner: '{{ nim_codex_user }}'
+    group: '{{ nim_codex_group }}'
     mode: 0750
   with_fileglob:
     - 'templates/scripts/*'

@@ -7,7 +7,7 @@ function headIsDetached() {
 }
 
 function binaryExists() {
-    ls -l build/nimbus_codex_${COMMIT} 2>&1 1>/dev/null
+    ls -l build/nim_codex_${COMMIT} 2>&1 1>/dev/null
 }
 
 function fetchChanges() {
@@ -18,15 +18,18 @@ function fetchChanges() {
 
 function buildBinaries() {
     # Control number of jobs used to lower impact on running nodes
-    export MAKEFLAGS="-j{{ codex_build_jobs | int }}"
-{% if codex_nim_commit is defined and codex_nim_commit != "" %}
-    export NIM_COMMIT={{ codex_nim_commit }}
+    export MAKEFLAGS="-j{{ nim_codex_build_jobs | int }}"
+{% if nim_codex_nim_commit is defined and nim_codex_nim_commit != "" %}
+    export NIM_COMMIT={{ nim_codex_nim_commit }}
 {% endif %}
 
     make update OVERRIDE=1
 
     make libbacktrace
-    ./env.sh nim "{{ codex_build_nim_flags }}" -d:chronicles_log_level:{{ codex_build_log_level }} c dagger.nim
+    ./env.sh nim \
+        {{ nim_codex_build_nim_flags }} \
+        -d:chronicles_log_level:{{ nim_codex_build_log_level }} \
+        c dagger.nim
 
     mkdir -p build
     # Rename binaries to match commit they were built from.
@@ -36,21 +39,21 @@ function buildBinaries() {
     ln -frs build/codex_${COMMIT} build/codex
 
     # Delete copies that are older than N days
-    find build -mtime +{{ codex_build_days_kept }} -exec rm '{}' \+
+    find build -mtime +{{ nim_codex_build_days_kept }} -exec rm '{}' \+
 }
 
 #-------------------------------------------------------------------------------
 
-BRANCH="{{ codex_repo_branch }}"
-SERVICE="{{ codex_service_name }}.service"
-SERVICE_PATH="{{ codex_service_path }}"
+BRANCH="{{ nim_codex_repo_branch }}"
+SERVICE="{{ nim_codex_service_name }}.service"
+SERVICE_PATH="{{ nim_codex_service_path }}"
 
 echo " >>> Build Start: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 cd "${SERVICE_PATH}"
 
-if [[ "${USER}" != "{{ codex_user }}" ]]; then
+if [[ "${USER}" != "{{ nim_codex_user }}" ]]; then
     echo "Incorrect user: ${USER}" >&2
-    echo "Expected: {{ codex_user }}" >&2
+    echo "Expected: {{ nim_codex_user }}" >&2
     exit 1
 fi
 
@@ -75,7 +78,7 @@ else
     buildBinaries
 fi
 
-{% if codex_build_restarts_service %}
+{% if nim_codex_build_restarts_service %}
 # Avoid faiure on first Ansible run due to missing service.
 if [[ $(systemctl is-active "${SERVICE}" || true) == "inactive" ]]; then
     echo " !!! No service to restart!"

@@ -1,55 +1,50 @@
 ---
-codex_service_name: 'codex-{{ codex_repo_branch }}'
-codex_service_path: '/data/{{ codex_service_name }}'
-codex_data_folder: '{{ codex_service_path }}/data'
-codex_repo_path: '{{ codex_service_path }}/repo'
-codex_logs_link: '{{ codex_service_path }}/logs'
+nim_codex_service_name: 'codex-{{ nim_codex_repo_branch }}'
+nim_codex_service_path: '/data/{{ nim_codex_service_name }}'
+nim_codex_data_folder: '{{ nim_codex_service_path }}/data'
+nim_codex_repo_path: '{{ nim_codex_service_path }}/repo'
+nim_codex_logs_link: '{{ nim_codex_service_path }}/logs'
 
-codex_user: 'codex'
-codex_group: 'staff'
+nim_codex_user: 'codex'
+nim_codex_group: 'staff'
 
-codex_build_service_name: 'build-{{ codex_service_name }}'
-codex_build_timer_enabled: true
-codex_build_timer_timeout: 3600
-codex_build_frequency: 'daily'
-codex_build_days_kept: 3
-codex_build_jobs: '{{ ansible_processor_vcpus / 2 | round(0, "ceil") }}'
-codex_build_log_level: 'TRACE'
-codex_build_restarts_service: true
-codex_build_nim_flags: >-
+# Build
+nim_codex_build_service_name: 'build-{{ nim_codex_service_name }}'
+nim_codex_build_timer_enabled: true
+nim_codex_build_timer_timeout: 3600
+nim_codex_build_frequency: 'daily'
+nim_codex_build_days_kept: 3
+nim_codex_build_jobs: '{{ ansible_processor_vcpus / 2 | round(0, "ceil") }}'
+nim_codex_build_log_level: 'TRACE'
+nim_codex_build_restarts_service: true
+nim_codex_build_nim_flags: >-
   -d:noSignalHandler
 
-codex_repo_url: 'https://github.com/status-im/nim-dagger'
-codex_repo_branch: 'main'
+nim_codex_repo_url: 'https://github.com/status-im/nim-dagger'
+nim_codex_repo_branch: 'main'
 
-codex_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
-codex_log_format: 'json' # auto colors nocolors json none
+nim_codex_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
+nim_codex_log_format: 'json' # auto colors nocolors json none
 
 # connectivity settings
-codex_public_address: '{{ ansible_host }}'
-codex_max_peers: 160
-codex_discovery_port: 9000
-codex_listening_port: 9000
-
-# Firewall
-codex_firewall_libp2p_open: true
-codex_firewall_metrics_open: true
+nim_codex_public_address: '{{ ansible_host }}'
+nim_codex_max_peers: 160
+nim_codex_listening_port: 9000
 
 # Scraping of metrics done via VPN. Protected by firewall.
-codex_metrics_enabled: true
-codex_metrics_address: '0.0.0.0'
-codex_metrics_port: 9200
-
-codex_rest_port: 5052
+nim_codex_metrics_enabled: true
+nim_codex_metrics_address: '0.0.0.0'
+nim_codex_metrics_port: 9200
+nim_codex_rest_port: 5052
 
 # Size in MiB
-codex_cache_size: 100
+nim_codex_cache_size: 100
 
 # Consul service definition settings
-codex_consul_service_name: 'beacon-node'
-codex_consul_service_file_name: '{{ codex_service_name | replace("-", "_") }}'
-codex_consul_metrics_service_name: '{{ codex_consul_service_name }}-metrics'
+nim_codex_consul_service_name: 'beacon-node'
+nim_codex_consul_service_file_name: '{{ nim_codex_service_name | replace("-", "_") }}'
+nim_codex_consul_metrics_service_name: '{{ nim_codex_consul_service_name }}-metrics'
 
 # Which version of Nim to use for the build
 # By default, it would use the one specified by the pinned nimbus-build-system
-codex_nim_commit: ''
+nim_codex_nim_commit: ''

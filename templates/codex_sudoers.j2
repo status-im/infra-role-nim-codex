@@ -1,4 +1,4 @@
 # Allow non-root users logging in as codex user
 
-%{{ codex_group }} ALL= NOPASSWD: /bin/su – {{ codex_user }}
-%{{ codex_group }} ALL=({{ codex_user }}) NOPASSWD: ALL
+%{{ nim_codex_group }} ALL= NOPASSWD: /bin/su – {{ nim_codex_user }}
+%{{ nim_codex_group }} ALL=({{ nim_codex_user }}) NOPASSWD: ALL

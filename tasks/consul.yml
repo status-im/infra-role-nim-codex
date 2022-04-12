@@ -3,22 +3,22 @@
 #- name: 'Create Consul service definition'
 #  include_role: name=consul-service
 #  vars:
-#    consul_config_name: '{{ codex_consul_service_file_name }}'
+#    consul_config_name: '{{ nim_codex_consul_service_file_name }}'
 #    consul_services:
-#      - id: '{{ codex_service_name }}'
-#        name: '{{ codex_consul_service_name }}'
-#        port: '{{ codex_listening_port }}'
-#        address: '{{ codex_public_address }}'
+#      - id: '{{ nim_codex_service_name }}'
+#        name: '{{ nim_codex_consul_service_name }}'
+#        port: '{{ nim_codex_listening_port }}'
+#        address: '{{ nim_codex_public_address }}'
 #        tags: ['{{ env }}.{{ stage }}', 'beacon', 'nimbus']
 #
-#      - id: '{{ codex_service_name }}-metrics'
-#        name: '{{ codex_consul_metrics_service_name }}'
-#        port: '{{ codex_metrics_port }}'
+#      - id: '{{ nim_codex_service_name }}-metrics'
+#        name: '{{ nim_codex_consul_metrics_service_name }}'
+#        port: '{{ nim_codex_metrics_port }}'
 #        address: '{{ ansible_local.wireguard.vpn_ip }}'
 #        tags: ['{{ env }}.{{ stage }}', 'beacon', 'nimbus', 'metrics']
 #        meta:
-#          container: '{{ codex_service_name }}'
+#          container: '{{ nim_codex_service_name }}'
 #        checks:
-#          - name: '{{ codex_consul_metrics_service_name }}-health'
+#          - name: '{{ nim_codex_consul_metrics_service_name }}-health'
 #            type: 'http'
-#            http: 'http://localhost:{{ codex_metrics_port }}/health'
+#            http: 'http://localhost:{{ nim_codex_metrics_port }}/health'

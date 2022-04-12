@@ -32,9 +32,9 @@ Add to your `requirements.yml` file:
 The crucial settings are:
 ```yaml
 # branch which should be built
-codex_repo_branch: 'stable'
+nim_codex_repo_branch: 'stable'
 # optional setting for debug mode
-codex_log_level: 'DEBUG'
+nim_codex_log_level: 'DEBUG'
 ```
 
 # Management
