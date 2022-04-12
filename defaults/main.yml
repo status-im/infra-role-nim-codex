@@ -41,7 +41,7 @@ nim_codex_rest_port: 5052
 nim_codex_cache_size: 100
 
 # Consul service definition settings
-nim_codex_consul_service_name: 'beacon-node'
+nim_codex_consul_service_name: 'nim-codex'
 nim_codex_consul_service_file_name: '{{ nim_codex_service_name | replace("-", "_") }}'
 nim_codex_consul_metrics_service_name: '{{ nim_codex_consul_service_name }}-metrics'
 
