@@ -9,15 +9,3 @@
         port: '{{ nim_codex_listening_port }}'
         address: '{{ nim_codex_public_address }}'
         tags: ['{{ env }}.{{ stage }}', 'codex', 'storage']
-
-      - id:   '{{ nim_codex_service_name }}-metrics'
-        name: '{{ nim_codex_consul_metrics_service_name }}'
-        port: '{{ nim_codex_metrics_port }}'
-        address: '{{ ansible_local.wireguard.vpn_ip }}'
-        tags: ['{{ env }}.{{ stage }}', 'codex', 'storage', 'metrics']
-        meta:
-          container: '{{ nim_codex_service_name }}'
-        checks:
-          - name: '{{ nim_codex_consul_metrics_service_name }}-health'
-            type: 'http'
-            http: 'http://localhost:{{ nim_codex_metrics_port }}/health'

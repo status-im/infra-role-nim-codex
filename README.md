@@ -16,7 +16,7 @@ The role will:
 The service exposes two ports by default:
 
 * `9000` - LibP2P peering port. Must __ALWAYS__ be public.
-* `9900` - Prometheus metrics port. Should not be public.
+* `5052` - REST API port. Must __NEVER__ be public.
 
 # Installation
 

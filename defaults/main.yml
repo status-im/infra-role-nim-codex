@@ -30,11 +30,6 @@ nim_codex_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
 nim_codex_public_address: '{{ ansible_host }}'
 nim_codex_max_peers: 160
 nim_codex_listening_port: 9000
-
-# Scraping of metrics done via VPN. Protected by firewall.
-nim_codex_metrics_enabled: true
-nim_codex_metrics_address: '0.0.0.0'
-nim_codex_metrics_port: 9200
 nim_codex_rest_port: 5052
 
 # Size in MiB
@@ -43,7 +38,6 @@ nim_codex_cache_size: 100
 # Consul service definition settings
 nim_codex_consul_service_name: 'nim-codex'
 nim_codex_consul_service_file_name: '{{ nim_codex_service_name | replace("-", "_") }}'
-nim_codex_consul_metrics_service_name: '{{ nim_codex_consul_service_name }}-metrics'
 
 # Which version of Nim to use for the build
 # By default, it would use the one specified by the pinned nimbus-build-system
