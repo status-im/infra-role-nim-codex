@@ -23,8 +23,8 @@ nim_codex_build_nim_flags: >-
 nim_codex_repo_url: 'https://github.com/status-im/nim-dagger'
 nim_codex_repo_branch: 'main'
 
+# Logs
 nim_codex_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
-nim_codex_log_format: 'json' # auto colors nocolors json none
 
 # connectivity settings
 nim_codex_public_address: '{{ ansible_host }}'
