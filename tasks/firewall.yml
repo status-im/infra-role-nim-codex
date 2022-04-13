@@ -6,4 +6,5 @@
     open_ports_default_chain: 'SERVICES'
     open_ports_list:
       - { port: '{{ nim_codex_listening_port }}', protocol: 'tcp' }
+      - { port: '{{ nim_codex_discovery_port }}', protocol: 'udp' }
       - { port: '{{ nim_codex_rest_port }}',      chain: 'VPN', ipset: '{{ env }}.{{ stage }}' }

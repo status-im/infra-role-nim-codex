@@ -29,7 +29,8 @@ nim_codex_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
 # connectivity settings
 nim_codex_public_address: '{{ ansible_host }}'
 nim_codex_max_peers: 160
-nim_codex_listening_port: 9000
+nim_codex_listening_port: 9000 # TCP
+nim_codex_discovery_port: 9000 # UDP
 nim_codex_rest_port: 5052
 
 # Size in MiB
