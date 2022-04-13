@@ -20,7 +20,7 @@ ExecStart={{ codex_repo_path }}/build/codex \
     --max-peers={{ codex_max_peers }} \
     --api-port={{ codex_rest_port }} \
     --cache-size={{ codex_cache_size }} \
-{% if codex_eth_public_key != "" %}
+{% if nim_codex_eth_public_key is defined %}
     --eth-public-key={{ codex_eth_public_key }} \
 {% endif %}
 

@@ -32,7 +32,7 @@ codex_discovery_port: 9000
 codex_listening_port: 9000
 
 # Ethereum public key for Codex node
-codex_eth_public_key: ''
+#nim_codex_eth_public_key: ~
 
 # Firewall
 codex_firewall_libp2p_open: true
