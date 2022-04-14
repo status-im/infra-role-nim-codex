@@ -21,6 +21,21 @@ ExecStart={{ nim_codex_repo_path }}/build/nim_codex \
     --api-port={{ nim_codex_rest_port }} \
     --max-peers={{ nim_codex_max_peers }} \
     --cache-size={{ nim_codex_cache_size }} \
+{% if nim_codex_eth_public_key is defined %}
+    --eth-account={{ nim_codex_eth_public_key }} \
+{% endif %}
+    --eth-provider={{ nim_codex_eth_provider | mandatory }} \
+{% if nim_codex_network_key_file is defined %}
+    --net-privkey={{ nim_codex_network_key_file }} \
+{% endif %}
+{% for url in nim_codex_bootstrap_nodes %}
+    --bootstrap-node={{ url }} \
+{% endfor %}
+    --metrics={{ nim_codex_metrics_enabled | to_json }} \
+{% if nim_codex_metrics_enabled %}
+    --metrics-address={{ nim_codex_metrics_address }} \
+    --metrics-port={{ nim_codex_metrics_port }}
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target

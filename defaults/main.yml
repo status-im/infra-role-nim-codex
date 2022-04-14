@@ -4,6 +4,8 @@ nim_codex_service_path: '/data/{{ nim_codex_service_name }}'
 nim_codex_data_folder: '{{ nim_codex_service_path }}/data'
 nim_codex_repo_path: '{{ nim_codex_service_path }}/repo'
 nim_codex_logs_link: '{{ nim_codex_service_path }}/logs'
+# Defaults to ephemeral key
+#nim_codex_network_key_file: ''
 
 nim_codex_user: 'codex'
 nim_codex_group: 'staff'
@@ -32,6 +34,19 @@ nim_codex_max_peers: 160
 nim_codex_listening_port: 9000 # TCP
 nim_codex_discovery_port: 9000 # UDP
 nim_codex_rest_port: 5052
+
+nim_codex_metrics_enabled: false
+nim_codex_metrics_address: '0.0.0.0'
+nim_codex_metrics_port: 9200
+
+nim_codex_bootstrap_nodes: []
+
+# Ethereum public key for Codex node
+# Defaults to the primary geth key
+#nim_codex_eth_public_key: ''
+
+# Mandatory eth provider
+#nim_codex_eth_provider: ~
 
 # Size in MiB
 nim_codex_cache_size: 100
