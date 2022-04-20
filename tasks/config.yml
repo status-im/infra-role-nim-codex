@@ -5,7 +5,7 @@
     state: directory
     owner: '{{ nim_codex_user }}'
     group: '{{ nim_codex_group }}'
-    mode: 0770
+    mode: 0700
 
 - name: Create helper scripts
   template:
