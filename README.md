@@ -6,7 +6,7 @@ This role provisions a nim Codex installation.
 
 The role will:
 
-* Checkout a branch from the [nim-dagger](https://github.com/status-im/nim-dagger/) repo
+* Checkout a branch from the [nim-codex](https://github.com/status-im/nim-codex/) repo
 * Build it using the [`build.sh`](./templates/build.sh.j2) Bash script
 * Schedule regular builds using [Systemd timers](https://www.freedesktop.org/software/systemd/man/systemd.timer.html)
 * Start a node by defining a [Systemd service](https://www.freedesktop.org/software/systemd/man/systemd.service.html)

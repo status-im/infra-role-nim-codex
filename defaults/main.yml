@@ -22,7 +22,7 @@ nim_codex_build_restarts_service: true
 nim_codex_build_nim_flags: >-
   -d:noSignalHandler
 
-nim_codex_repo_url: 'https://github.com/status-im/nim-dagger'
+nim_codex_repo_url: 'https://github.com/status-im/nim-codex'
 nim_codex_repo_branch: 'main'
 
 # Logs
