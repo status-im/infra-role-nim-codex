@@ -24,16 +24,10 @@ function buildBinaries() {
 {% endif %}
 
     make update OVERRIDE=1
+    make exec
 
-    make libbacktrace
-    ./env.sh nim \
-        {{ nim_codex_build_nim_flags }} \
-        -d:chronicles_log_level:{{ nim_codex_build_log_level }} \
-        c dagger.nim
-
-    mkdir -p build
     # Rename binaries to match commit they were built from.
-    mv "dagger.out" "build/nim_codex_${COMMIT}"
+    mv "build/codex" "build/nim_codex_${COMMIT}"
 
     # Create a symbolic link to the latest version
     ln -frs build/nim_codex_${COMMIT} build/nim_codex
