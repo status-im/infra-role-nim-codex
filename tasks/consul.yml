@@ -7,7 +7,7 @@
       - id:   '{{ nim_codex_service_name }}'
         name: '{{ nim_codex_consul_service_name }}'
         port: '{{ nim_codex_listening_port }}'
-        address: '{{ nim_codex_announce_address }}'
+        address: '{{ nim_codex_public_address }}'
         tags: ['{{ env }}.{{ stage }}', 'codex', 'storage']
         checks:
           - name: '{{ nim_codex_service_name }}-health'
