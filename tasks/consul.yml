@@ -12,4 +12,4 @@
         checks:
           - name: '{{ nim_codex_service_name }}-health'
             type: 'http'
-            http: 'http://localhost:{{ nim_codex_rest_port }}/api/codex/v1/info'
+            http: 'http://localhost:{{ nim_codex_rest_port }}/api/codex/v1/debug/info'
