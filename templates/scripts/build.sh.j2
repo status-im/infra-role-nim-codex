@@ -24,7 +24,7 @@ function buildBinaries() {
 {% endif %}
 
     make update OVERRIDE=1
-    make exec
+    make
 
     # Rename binaries to match commit they were built from.
     mv "build/codex" "build/nim_codex_${COMMIT}"
